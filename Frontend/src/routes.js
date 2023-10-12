@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import BusHome from "./pages/BusHome";
+import OwnerHome from "./pages/OwnerHome";
 import RouteMHome from "./pages/RouteMHome";
 import Auth from "./pages/Auth";
 import RouteManager from "./pages/RouteManager";
@@ -9,7 +9,7 @@ import { AppContext } from "./context/AuthContext";
 
 const AppRoutes = () => {
   const { user } = useContext(AppContext);
-  const Home = user?.isBusOwner ? BusHome : RouteMHome;
+  const Home = user?.isBusOwner ? OwnerHome : RouteMHome;
   return (
     <Routes>
       <Route path="/">
