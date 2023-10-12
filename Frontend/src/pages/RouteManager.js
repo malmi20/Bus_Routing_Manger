@@ -2,18 +2,16 @@ import { Col, Row, Card, InputGroup } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { RouteMgrSchema } from "../schemas/RouteMgrSchema";
-import { database } from "../components/util/FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { Formik } from "formik";
-import { notify } from "../components/ToastMessage";
+import { notify } from "../components/custom/ToastMessage";
 import { BsSearch } from "react-icons/bs";
 import DateTimePicker from "react-datetime-picker";
-import Table from "../components/CustomTable";
+import Table from "../components/custom/CustomTable";
 import { useSort } from "@table-library/react-table-library/sort";
 import tableData from "../constants/tableData.json";
 import moment from "moment/moment";
-import { debounce } from "../components/util";
+import { debounce } from "../utils/index";
 
 function RouteManager() {
   console.log(`tableData`, tableData);
@@ -48,8 +46,8 @@ function RouteManager() {
     } catch (error) {
       console.error(`error`, error);
       let errorMessage = "";
-      if (error.code === "auth/invalid-login-credentials") {
-        errorMessage = "Invalid login credentials";
+      if (error.title) {
+        errorMessage = error.title;
       } else {
         errorMessage = "Something went wrong";
       }

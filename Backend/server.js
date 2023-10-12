@@ -1,45 +1,53 @@
-require ("dotenv").config()
+require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose")
-const busesRoutes = require('./routes/buses')
+const mongoose = require("mongoose");
 
 //express app
 const app = express();
 
 //middleware
-app.use(express.json());
+app.use(express.json()); //to add json to the 'req' Object
 
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+});
+
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
+app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use((err,req,res,next)=>{
-console.log(req.path, req.method)
-next()
+//routes
+app.use(`/api/user`, require("./routes/user/userRoutes"));
+app.use(`/api/buses`, require("./routes/bus/busRoutes"));
 
-  const errorStatus = err.status || 500
-  const errorMessage = err.message || "something went wrong"
+
+app.use((err, _req, res, _next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || "Something Went Wrong, Please Contact Technical Team.";
   return res.status(errorStatus).json({
-      success: false,
-      status: errorStatus,
-      message: errorMessage,
-      stack: err.stack
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
+
+//connect to DB
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    // listen to port
+    app.listen(process.env.PORT, () => {
+      console.log(
+        "Connected to db & listening for requests on port",
+        process.env.PORT
+      );
+    });
   })
-})
-
-//Routes
-app.use('/api/buses', busesRoutes)
-
-
-
-
-//DB connection
-mongoose.connect(process.env.MONGO_URI)
-.then(()=>{
-     //listening for request
-     app.listen(process.env.PORT, ()=> {
-     console.log("DB connected and listening on port ", process.env.PORT)
-     })
-})
-.catch((error)=>{
-    console.log(error)
-})
+  .catch((err) => {
+    console.log(err);
+  });

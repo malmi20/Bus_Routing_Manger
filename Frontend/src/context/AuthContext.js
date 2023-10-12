@@ -14,16 +14,22 @@ const AuthContextProvider = ({ children }) => {
   const location = useLocation();
   const pathname = location.pathname;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   // Check if user is authenticated function
   const checkNUpdateAuth = useCallback(() => {
     if (isAuthenticated) return;
-    let localStObj = localStorage.getItem("user");
+    let localStObj = localStorage.getItem("token");
     if (!localStObj && pathname !== "/auth") {
       setIsAuthenticated(false);
+      setUser(null);
       navigate("/auth");
     } else if(localStObj) {
       setIsAuthenticated(true);
+      let userData = localStorage.getItem("userData");
+      if (userData) {
+        setUser(JSON.parse(userData));
+      }
     }
   }, [isAuthenticated, navigate, pathname]);
 
@@ -35,15 +41,20 @@ const AuthContextProvider = ({ children }) => {
 
   // Sign out function
   const handleSignOut = useCallback(() => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userData");
+    setUser(null);
     navigate("/auth");
     setIsAuthenticated(false);
   }, [navigate]);
 
   // Sign in function
   const handleSignIn = useCallback(
-    (user) => {
-      localStorage.setItem("user", JSON.stringify({ user }));
+    (authData) => {
+      const { token,...userData } = authData;
+      localStorage.setItem("token", JSON.stringify({ token }));
+      localStorage.setItem("userData", JSON.stringify(userData));
+      setUser(userData);
       setIsAuthenticated(true);
       navigate("/");
     },
@@ -55,8 +66,9 @@ const AuthContextProvider = ({ children }) => {
       isAuthenticated,
       handleSignIn,
       handleSignOut,
+      user,
     }),
-    [isAuthenticated, handleSignIn, handleSignOut]
+    [isAuthenticated, handleSignIn, handleSignOut, user]
   );
 
   return (

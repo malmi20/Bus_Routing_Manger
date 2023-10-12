@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { NavDropdown } from "react-bootstrap";
-import { signOut } from "firebase/auth";
-import { database } from "../util/FirebaseConfig";
 import { AppContext } from "../../context/AuthContext";
 import logo from "../../assets/school-bus-1759.svg"
 
@@ -17,7 +15,6 @@ const Navbar = ({ hamActive, setHamActive }) => {
   };
 
   const handleSignOutFunc = async () => {
-    await signOut(database);
     handleSignOut();
   };
 
@@ -39,9 +36,6 @@ const Navbar = ({ hamActive, setHamActive }) => {
             <div className={styles.navLinksWrapper}>
               <Link to={"/routeManager"} className={`${styles.nav} center ${pathname === '/routeManager' && 'active'}`}>
                 Route Manager
-              </Link>
-              <Link to={"/ticketingManger"} className={`${styles.nav} center ${pathname === '/ticketingManger' && 'active'}`}>
-                Ticketing Manager
               </Link>
             </div>
             <div className={styles.verticalLine} />

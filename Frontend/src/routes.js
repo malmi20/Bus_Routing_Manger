@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import RouteManager from "./pages/RouteManager";
-import TicketingManger from "./pages/TicketingManger";
 import Profile from "./pages/Profile";
 
 const AppRoutes = () => {
@@ -15,7 +14,6 @@ const AppRoutes = () => {
         {/* Home Elements */}
         <Route path={"/auth"} element={<Auth />} />
         <Route path={"/routeManager"} element={<RouteManager />} />
-        <Route path={"/ticketingManger"} element={<TicketingManger />} />
         <Route path="/profile" element={<Profile />} />
       </Route>
       <Route path="*" element={<Auth />} />

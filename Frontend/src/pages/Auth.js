@@ -20,7 +20,7 @@ export default function Auth() {
   return (
     <div className="Auth_Main">
       <div className={containerClass} id="container">
-        <SignUpForm ref={SignUpFormRef}/>
+        <SignUpForm ref={SignUpFormRef} changeState={handleOnClick}/>
         <SignInForm ref={SignInFormRef}/>
         <div className="overlay-container">
           <div className="overlay">

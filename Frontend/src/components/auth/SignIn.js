@@ -2,12 +2,11 @@ import { useContext, forwardRef, useImperativeHandle, useState } from "react";
 import { Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { UserSignInSchema } from "../../schemas/UserSchema";
-import { database } from "../util/FirebaseConfig";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { Formik } from "formik";
-import { notify } from "../ToastMessage";
+import { notify } from "../custom/ToastMessage";
 import { AppContext } from "../../context/AuthContext";
 import Spinner from "react-bootstrap/Spinner";
+import { login } from "../../services/userService";
 
 const SignInForm = forwardRef((_props, ref) => {
   const [formKey, setFormKey] = useState(0); // add a key to reset the form
@@ -29,24 +28,21 @@ const SignInForm = forwardRef((_props, ref) => {
     try {
       setSubmitting(true);
       setIsLoading(true);
-      const authData = await signInWithEmailAndPassword(
-        database,
-        values.email,
-        values.password
-      );
-      console.log(`authData`, authData);
-      setSubmitting(false);
-      setIsLoading(false);
-      resetForm();
-      notify("success", "Logged in successfully");
-      handleSignIn(authData.user);
+      const authData = await login(values);
+      if (authData.status === 200) {
+        setSubmitting(false);
+        setIsLoading(false);
+        resetForm();
+        notify("success", authData.data.message);
+        handleSignIn(authData.data.details);
+      } else {
+        notify("error", authData?.data?.message);
+      }
     } catch (error) {
       console.error(`error`, error);
       let errorMessage = "";
-      if (error.code === "auth/invalid-login-credentials") {
-        errorMessage = "Invalid login credentials";
-      } else if (error.code === "auth/too-many-requests") {
-        errorMessage = "Too many requests. Please try again later";
+      if (error.message) {
+        errorMessage = error.message;
       } else {
         errorMessage = "Something went wrong";
       }
@@ -70,7 +66,14 @@ const SignInForm = forwardRef((_props, ref) => {
         initialValues={initialValues}
         enableReinitialize={true}
       >
-        {({ handleSubmit, handleChange, values, touched, errors, resetForm }) => (
+        {({
+          handleSubmit,
+          handleChange,
+          values,
+          touched,
+          errors,
+          resetForm,
+        }) => (
           <Form noValidate onSubmit={handleSubmit} className="auth_form">
             <Row className="mb-3">
               <Form.Group md="4" controlId="email">
@@ -102,7 +105,9 @@ const SignInForm = forwardRef((_props, ref) => {
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
-            <button className="auth_btn" type="submit">Sign In</button>
+            <button className="auth_btn" type="submit">
+              Sign In
+            </button>
           </Form>
         )}
       </Formik>

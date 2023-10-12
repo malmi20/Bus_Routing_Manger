@@ -1,15 +1,13 @@
 import { Row } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
 import { UserRegSchema } from "../../schemas/UserSchema";
-import { database } from "../util/FirebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState, forwardRef, useImperativeHandle } from "react";
 import { Formik } from "formik";
-import { notify } from "../ToastMessage";
+import { notify } from "../custom/ToastMessage";
 import Spinner from "react-bootstrap/Spinner";
+import { register } from "../../services/userService";
 
-const SignUpForm = forwardRef((_props, ref) => {
+const SignUpForm = forwardRef(({changeState}, ref) => {
   const [formKey, setFormKey] = useState(0); // add a key to reset the form
   useImperativeHandle(ref, () => ({
     resetFormChanges() {
@@ -18,33 +16,32 @@ const SignUpForm = forwardRef((_props, ref) => {
     },
   }));
   const initData = {
+    isBusOwner: false,
     password: "",
     email: "",
     confirmPassword: "",
   };
-  const navigate = useNavigate();
   const [initialValues, setInitialValues] = useState(initData);
   const [isLoading, setIsLoading] = useState(false);
   const submitHandler = async (values, { setSubmitting, resetForm }) => {
     try {
       setSubmitting(true);
       setIsLoading(true);
-      const authData = await createUserWithEmailAndPassword(
-        database,
-        values.email,
-        values.password
-      );
-      console.log(`authData`, authData);
-      setSubmitting(false);
-      setIsLoading(false);
-      resetForm();
-      notify("success", "User registered successfully");
-      navigate("/auth");
+      const authData = await register(values);
+      if (authData.status === 200) {
+        setSubmitting(false);
+        setIsLoading(false);
+        resetForm();
+        notify("success", authData.data.message);
+        changeState("signIn");
+      } else {
+        notify("error", authData?.data?.message);
+      }
     } catch (error) {
       console.error(`error`, error);
       let errorMessage = "";
-      if (error.code === "auth/email-already-in-use") {
-        errorMessage = "Email already in use";
+      if (error.message) {
+        errorMessage = error.message;
       } else {
         errorMessage = "Something went wrong";
       }
@@ -113,8 +110,20 @@ const SignUpForm = forwardRef((_props, ref) => {
                   {errors.confirmPassword}
                 </Form.Control.Feedback>
               </Form.Group>
+              <Form.Group md="4" className="mt-1" controlId="isBusOwner">
+                <Form.Check
+                  type="switch"
+                  name="isBusOwner"
+                  id="custom-switch"
+                  label="Is Bus Owner"
+                  value={values.isBusOwner}
+                  onChange={handleChange}
+                />
+              </Form.Group>
             </Row>
-            <button className="auth_btn" type="submit">Register</button>
+            <button className="auth_btn" type="submit">
+              Register
+            </button>
           </Form>
         )}
       </Formik>

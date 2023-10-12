@@ -9,7 +9,7 @@ import NavbarResponsive from "./components/NavbarResponsive/NavbarResponsive";
 // import Footer from "./components/Footer/Footer";
 import Routes from "./routes";
 import { Container } from "react-bootstrap";
-import { Toast } from "./components/ToastMessage";
+import { Toast } from "./components/custom/ToastMessage";
 
 const App = () => {
   const [hamActive, setHamActive] = useState(false);
