@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import BusHome from "./pages/BusHome";
+import RouteMHome from "./pages/RouteMHome";
 import Auth from "./pages/Auth";
 import RouteManager from "./pages/RouteManager";
 import Profile from "./pages/Profile";
+import { AppContext } from "./context/AuthContext";
 
 const AppRoutes = () => {
+  const { user } = useContext(AppContext);
+  const Home = user?.isBusOwner ? BusHome : RouteMHome;
   return (
     <Routes>
       <Route path="/">

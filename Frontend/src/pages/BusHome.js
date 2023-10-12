@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <Row>
       <Col md={12} className="bg-primary">
-        Home
+        Bus Home
       </Col>
     </Row>
   );

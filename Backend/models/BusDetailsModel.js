@@ -8,11 +8,6 @@ const busDetailsSchema = new Schema(
       required: true,
     },
 
-    route: {
-      type: String,
-      required: true,
-    },
-
     driver_id: {
       type: String,
       required: true,

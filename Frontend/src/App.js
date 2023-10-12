@@ -6,7 +6,6 @@ import 'react-clock/dist/Clock.css';
 // Components import
 import Navbar from "./components/Navbar/Navbar";
 import NavbarResponsive from "./components/NavbarResponsive/NavbarResponsive";
-// import Footer from "./components/Footer/Footer";
 import Routes from "./routes";
 import { Container } from "react-bootstrap";
 import { Toast } from "./components/custom/ToastMessage";
@@ -23,7 +22,6 @@ const App = () => {
         <div>
           <Routes />
         </div>
-        {/* <Footer /> */}
       </Container>
     </div>
   );

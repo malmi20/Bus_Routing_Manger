@@ -43,11 +43,6 @@ const Navbar = ({ hamActive, setHamActive }) => {
         )}
           <NavDropdown title="Profile" hidden={!isAuthenticated}>
             <NavDropdown.Item>
-              <Link to={"/profile"} className={styles.login}>
-                User profile
-              </Link>
-            </NavDropdown.Item>
-            <NavDropdown.Item>
               <div onClick={handleSignOutFunc} className={styles.login}>
                 Sign Out
               </div>
