@@ -175,7 +175,7 @@ function RouteManager() {
       body: tableData.map(item => [
         item.routeId,
         item.busNo,
-        item.start_date_time,
+        moment(item.start_date_time).format("DD/MM/YYYY - hh:mm A"),
         item.from,
         item.to
       ])

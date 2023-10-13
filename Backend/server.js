@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //routes
 app.use(`/api/user`, require("./routes/user/userRoutes"));
 app.use(`/api/buses`, require("./routes/bus/busRoutes"));
-
+app.use(`/api/busDetails`, require("./routes/bus/busDetailsRoutes"));
 
 app.use((err, _req, res, _next) => {
   const errorStatus = err.status || 500;

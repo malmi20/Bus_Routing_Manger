@@ -6,7 +6,7 @@ import { post, get , deleteReq } from "../utils/apiHelper";
  */
 export const fetchBusDetails = async () => {
   try {
-    const response = await get("/buses/busDetails");
+    const response = await get("/busDetails/busDetails");
     return response;
   } catch (error) {
     console.error(error);
@@ -20,7 +20,7 @@ export const fetchBusDetails = async () => {
  */
 export const fetchBusRoutes = async () => {
   try {
-    const response = await get("/buses/busRoutes");
+    const response = await get("/busDetails/busRoutes");
     return response;
   } catch (error) {
     console.error(error);
@@ -34,7 +34,7 @@ export const fetchBusRoutes = async () => {
  */
 export const fetchAssignedBusRouteDetails = async () => {
   try {
-    const response = await get("/buses/getAssignedBusRouteDetails");
+    const response = await get("/busDetails/getAssignedBusRouteDetails");
     return response;
   } catch (error) {
     console.error(error);
@@ -50,7 +50,7 @@ export const fetchAssignedBusRouteDetails = async () => {
 export const saveAssignedBusRouteDetails = async (assignedBusRouteDetails) => {
   try {
     const response = await post(
-      "/buses/saveAssignedBusRouteDetails",
+      "/busDetails/saveAssignedBusRouteDetails",
       assignedBusRouteDetails,
       true
     );
@@ -69,7 +69,7 @@ export const saveAssignedBusRouteDetails = async (assignedBusRouteDetails) => {
 export const updateBusRouteDetails = async (updatedBusRouteDetails) => {
   try {
     const response = await post(
-      "/buses/updateBusRouteDetails",
+      "/busDetails/updateBusRouteDetails",
       updatedBusRouteDetails,
       true
     );
@@ -87,7 +87,7 @@ export const updateBusRouteDetails = async (updatedBusRouteDetails) => {
  */
 export const deleteBusRouteDetails = async (id) => {
   try {
-    const response = await deleteReq("/buses/deleteBusRouteDetails", { id }, true);
+    const response = await deleteReq("/busDetails/deleteBusRouteDetails", { id }, true);
     return response;
   } catch (error) {
     console.error(error);
