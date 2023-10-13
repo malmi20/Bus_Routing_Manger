@@ -61,7 +61,7 @@ export const patch = async (url, data, authenticationRequired = true) => {
 
 export const get = async (
   url,
-  data,
+  data = null,
   authenticationRequired = true,
   responseType = "json"
 ) => {

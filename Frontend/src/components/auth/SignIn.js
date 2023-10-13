@@ -19,7 +19,6 @@ const SignInForm = forwardRef((_props, ref) => {
   const initData = {
     password: "",
     email: "",
-    confirmPassword: "",
   };
   const { handleSignIn } = useContext(AppContext);
   const [initialValues, setInitialValues] = useState(initData);
