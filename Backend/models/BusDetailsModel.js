@@ -19,6 +19,6 @@ const busDetailsSchema = new Schema(
     },
   },
   { timestamps: true }
-);
+)
 
 module.exports = mongoose.model("busdetails", busDetailsSchema);

@@ -1,46 +1,29 @@
-const express = require('express');
-const router = express.Router();
-// import all controllers
-const busDetailsController = require('../../controllers/busDetailsController');
+const express = require('express')
+const {
+    createBus,
+    getbuses,
+    getbus,
+    deleteBus,
+    updateBus
+} = require('../../controllers/busController')
+
+const router = express.Router()
+
 
 //get all buses
-router.get('/busDetails', busDetailsController.getBusDetails);
-
-//get all bus routes
-router.get('/busRoutes', busDetailsController.getBusRouteDetails);
-
-//get all assigned bus route details
-router.get('/getAssignedBusRouteDetails', busDetailsController.getAssignedBusRouteDetails);
-
-
-//save assigned bus route details
-router.post('/saveAssignedBusRouteDetails', busDetailsController.saveAssignedBusRouteDetails);
-
-//update assigned bus route details
-router.post('/updateBusRouteDetails', busDetailsController.updateBusRouteDetails);
-
-//delete assigned bus route details
-router.delete('/deleteBusRouteDetails', busDetailsController.deleteBusRouteDetails);
+router.get('/', getbuses)
 
 //get a single bus
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'get one bus'})
-})
+router.get('/:id', getbus)
 
 //post a new bus
-router.post('/', (req, res) => {
-    res.json({mssg: 'create new bus'})
-})
+router.post('/', createBus)
 
 //delete a single bus
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'delete a bus'})
-})
+router.delete('/:id', deleteBus)
 
 //update a single bus
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'update one bus'})
-})
+router.patch('/:id', updateBus)
 
 
 module.exports = router
