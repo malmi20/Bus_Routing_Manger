@@ -1,30 +1,29 @@
 const express = require('express')
+const {
+    createBus,
+    getbuses,
+    getbus,
+    deleteBus,
+    updateBus
+} = require('../../controllers/busController')
+
 const router = express.Router()
 
+
 //get all buses
-router.get('/', (req, res) => {
-    res.json({mssg: 'get all buses'})
-})
+router.get('/', getbuses)
 
 //get a single bus
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'get one bus'})
-})
+router.get('/:id', getbus)
 
 //post a new bus
-router.post('/', (req, res) => {
-    res.json({mssg: 'create new bus'})
-})
+router.post('/', createBus)
 
 //delete a single bus
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'delete a bus'})
-})
+router.delete('/:id', deleteBus)
 
 //update a single bus
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'update one bus'})
-})
+router.patch('/:id', updateBus)
 
 
 module.exports = router
