@@ -3,10 +3,10 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./Navbar.module.css";
 import { NavDropdown } from "react-bootstrap";
 import { AppContext } from "../../context/AuthContext";
-import logo from "../../assets/school-bus-1759.svg"
+import logo from "../../assets/bus-logo.svg"
 
 const Navbar = ({ hamActive, setHamActive }) => {
-  const { handleSignOut, isAuthenticated } = useContext(AppContext);
+  const { handleSignOut, isAuthenticated,user } = useContext(AppContext);
 
   const location = useLocation();
   const { pathname } = location;
@@ -27,13 +27,13 @@ const Navbar = ({ hamActive, setHamActive }) => {
         <span className={styles.hamburgerLines}></span>
       </button>
       <Link to={"/"} className={`${styles.navLeft}`}>
-        <img src={logo} alt="logo" width={100} height={100} className={styles.brand} />
+        <img src={logo} alt="logo" width={300} height={300} className={styles.brand} />
       </Link>
       <div className={`${styles.navRight} center`}>
         <div className="d-flex align-items-center">
           {isAuthenticated && (
           <div className={styles.navLinksWrapper}>
-            <div className={styles.navLinksWrapper}>
+            <div className={styles.navLinksWrapper} hidden={user?.isBusOwner}>
               <Link to={"/routeManager"} className={`${styles.nav} center ${pathname === '/routeManager' && 'active'}`}>
                 Route Manager
               </Link>

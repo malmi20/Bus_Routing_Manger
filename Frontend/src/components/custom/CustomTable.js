@@ -10,7 +10,7 @@ const CustomTable = ({nodes ,sort,columns}) => {
 
   return (
     <>
-      <CompactTable columns={columns} data={data} theme={theme} sort={sort} />
+      <CompactTable columns={columns} data={data} theme={theme} sort={sort} key={data.id} />
     </>
   );
 };

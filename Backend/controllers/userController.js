@@ -60,10 +60,10 @@ const register = async (req, res, next) => {
 };
 
 const login = async (req, res, next) => {
-  const { name, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await customerModel.findOne({ name });
+    const user = await customerModel.findOne({ email });
     if (!user) {
       const error = new Error("User not found.");
       error.status = 404;

@@ -1,15 +1,15 @@
-import React from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/routeManager");
+  }, [navigate]);
   return (
-    <Row>
-      <Col md={12} className="bg-primary">
-        Route Home
-      </Col>
-    </Row>
+    null
   );
 };
 
