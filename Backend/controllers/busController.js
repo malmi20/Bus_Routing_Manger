@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 //get all buses
 const getbuses = async (req, res) => {
-    const buses = await BusDetails.find({}).sort({createAt: -1})
+    const buses = await BusDetails.find({}).sort({createdAt: -1})
 
     res.status(200).json(buses)
 }
@@ -29,6 +29,23 @@ const getbus = async(req, res) => {
 //create bus
 const createBus = async (req, res) => {
     const {bus_no, driver_id, driver_name} = req.body
+    console.log('create bus')
+
+    let emptyFields = []
+
+    if(!bus_no){
+        emptyFields.push('bus_no')
+    }
+    if(!driver_id){
+        emptyFields.push('driver_id')
+    }
+    if(!driver_name){
+        emptyFields.push('driver_name')
+    }
+
+    if(emptyFields.length > 0){
+        return res.status(400).json({error: "please fill all the fields", emptyFields })
+    }
 
     //add doc to db
     try{
@@ -49,8 +66,9 @@ const deleteBus = async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'no such bus'})
     }
+    console.log(id)
 
-    const bus = await BusDetails.findByIdAndDelete({_id: id})
+    const bus = await BusDetails.findByIdAndDelete(id)
 
     if(!bus){
         return res.status(400).json({error: 'no such bus'})
@@ -63,11 +81,13 @@ const deleteBus = async (req, res) => {
 const updateBus = async (req, res) => {
     const {id} = req.params
 
+    //const { description, amount} = req.body;
+
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'no such bus'})
     }
 
-    const bus = await BusDetails.findByIdAndUpdate({_id: id}, {
+    const bus = await BusDetails.findOneAndUpdate({_id: id}, {
         ...req.body
     })
 

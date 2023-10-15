@@ -8,12 +8,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AuthContextProvider from "./context/AuthContext";
 import "./styles.scss";
 
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <Router>
     <AuthContextProvider>
-      <App />
+      
+        <App />
+      
     </AuthContextProvider>
   </Router>
 );
