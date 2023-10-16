@@ -38,6 +38,11 @@ const Navbar = ({ hamActive, setHamActive }) => {
                 Route Manager
               </Link>
             </div>
+            <div className={styles.navLinksWrapper} hidden={!user?.isBusOwner}>
+              <Link to={"/buslist"} className={`${styles.nav} center ${pathname === '/buslist' && 'active'}`}>
+                Bus List Manager
+              </Link>
+            </div>
             <div className={styles.verticalLine} />
           </div>
         )}
