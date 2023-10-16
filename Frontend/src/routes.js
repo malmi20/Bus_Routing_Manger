@@ -23,6 +23,7 @@ const AppRoutes = () => {
         <Route path="/buslist" element={<BusList/>}/>
         <Route path="/addbus" element={<AddBus/>}/>
         <Route path="/updateBus/:id" element={<UpdateBus/>}/>
+        <Route path="/ownerHome" element={<OwnerHome/>}/>
       </Route>
       <Route path="*" element={<Auth />} />
     </Routes>
