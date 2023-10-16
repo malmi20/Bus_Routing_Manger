@@ -29,6 +29,7 @@ class Server {
     this.app.use(`/api/user`, require('./routes/user/userRoutes'));
     this.app.use(`/api/buses`, require('./routes/bus/busRoutes'));
     this.app.use(`/api/busDetails`, require('./routes/bus/busDetailsRoutes'));
+    this.app.use(`/api/payment`, require("./routes/payment/paymentRoute"));
 
     this.app.use((err, _req, res, _next) => {
       const errorStatus = err.status || 500;
