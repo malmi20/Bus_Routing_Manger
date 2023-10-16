@@ -22,6 +22,7 @@ const verifyUser = async (req, _res, next) => {
   }
 };
 
+// register the user according to their type
 const register = async (req, res, next) => {
   try {
     console.log(`called register`);
@@ -59,6 +60,7 @@ const register = async (req, res, next) => {
   }
 };
 
+//login in the user to the system
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -94,6 +96,7 @@ const login = async (req, res, next) => {
   }
 };
 
+//update the password of the user
 const updateUserPassword = async (req, res, next) => {
   try {
     const { currentPassword, newPassword, userId } = req.body;

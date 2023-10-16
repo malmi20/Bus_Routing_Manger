@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 
+//validations
 export const UserRegSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string()

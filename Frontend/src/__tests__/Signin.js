@@ -33,6 +33,7 @@ describe("SignIn Component test", () => {
     jest.resetAllMocks();
   });
 
+  //check whether if the login component render correctly with sign in, email, password
   it("should render login component correctly", async () => {
     render(
       <>
@@ -48,6 +49,7 @@ describe("SignIn Component test", () => {
     expect(screen.getByText("Password")).toBeInTheDocument();
   });
 
+  //check whether if it shows the error when click on signin button without filling email and password
   it("should show validation error when click on signin button without filling email and password", async () => {
     render(
       <>
@@ -67,6 +69,7 @@ describe("SignIn Component test", () => {
     });
   });
 
+  //check whether if it shows the toast error of Incorrect email or password when signing in with unknown email
   it("should show toast error of Incorrect email or password when signing in with unknown email", async () => {
     login.mockResolvedValue(signInUserNotFoundMockData);
     render(
@@ -94,6 +97,7 @@ describe("SignIn Component test", () => {
     });
   });
 
+  //check whether if it shows the toast error of Incorrect email or password when signing in with incorrect password
   it("should show toast error of Incorrect email or password when signing in with incorrect password", async () => {
     login.mockResolvedValue(signInIncorrectCredentialsMockData);
     render(
@@ -121,6 +125,7 @@ describe("SignIn Component test", () => {
     });
   });
   
+  //check whether if it shows the successfully login message when signing in with correct password & emails
   it("should show login successful message when signing in with correct password & email", async () => {
     login.mockResolvedValue(signInMockData);
     render(

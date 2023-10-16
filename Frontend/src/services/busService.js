@@ -4,6 +4,7 @@ import { post, get , deleteReq } from "../utils/apiHelper";
  * fetchBusDetails
  * @returns  {Promise<object>} response
  */
+//return bus details
 export const fetchBusDetails = async () => {
   try {
     const response = await get("/busDetails/busDetails");
@@ -18,6 +19,7 @@ export const fetchBusDetails = async () => {
  * fetchBusRoutes
  * @returns  {Promise<object>} response
  */
+//return bus route details
 export const fetchBusRoutes = async () => {
   try {
     const response = await get("/busDetails/busRoutes");
@@ -32,6 +34,7 @@ export const fetchBusRoutes = async () => {
  * fetchAssignedBusRouteDetails
  * @returns  {Promise<object>} response
  */
+//return bus routes with assigned busses
 export const fetchAssignedBusRouteDetails = async () => {
   try {
     const response = await get("/busDetails/getAssignedBusRouteDetails");
@@ -47,6 +50,7 @@ export const fetchAssignedBusRouteDetails = async () => {
  * @param {object} assignedBusRouteDetails
  * @returns  {Promise<object>} response
  */
+//save bus routes with assigned busses
 export const saveAssignedBusRouteDetails = async (assignedBusRouteDetails) => {
   try {
     const response = await post(
@@ -66,6 +70,7 @@ export const saveAssignedBusRouteDetails = async (assignedBusRouteDetails) => {
  * @param {object} updateBusRouteDetails
  * @returns  {Promise<object>} response
  */
+//updated bus route details
 export const updateBusRouteDetails = async (updatedBusRouteDetails) => {
   try {
     const response = await post(

@@ -2,6 +2,7 @@ const busDetailsModel = require("../models/BusDetailsModel");
 const busRoutesModel = require("../models/BusRoutesModel");
 const assignedBusRouteDetailsModel = require("../models/AssignedBusRouteDetailsModel");
 
+//Get all bus details of the system
 const getBusDetails = async (_req, res, next) => {
   try {
     const busInfo = await busDetailsModel.find();
@@ -14,6 +15,7 @@ const getBusDetails = async (_req, res, next) => {
   }
 };
 
+//Get all the route details 
 const getBusRouteDetails = async (_req, res, next) => {
   try {
     const busRoutes = await busRoutesModel.find();
@@ -26,6 +28,7 @@ const getBusRouteDetails = async (_req, res, next) => {
   }
 };
 
+//get the all details of bus routes and assigned busses 
 const getAssignedBusRouteDetails = async (_req, res, next) => {
   try {
     const assignedBusRouteDetails = await assignedBusRouteDetailsModel
@@ -73,6 +76,7 @@ const checkBusNoExistsAndRemove = async (bus_no) => {
   }
 };
 
+//Assigning bus routes with buses and time
 const saveAssignedBusRouteDetails = async (req, res, next) => {
   const { bus_no, route_id, start_date_time } = req.body;
   try {
@@ -111,6 +115,7 @@ const saveAssignedBusRouteDetails = async (req, res, next) => {
   }
 };
 
+//update bus route details
 const updateBusRouteDetails = async (req, res, next) => {
   const { bus_no, route_id, start_date_time, id } = req.body;
   try {
@@ -156,6 +161,7 @@ const updateBusRouteDetails = async (req, res, next) => {
   }
 };
 
+//delete route details
 const deleteBusRouteDetails = async (req, res, next) => {
   const { id } = req.body;
   try {

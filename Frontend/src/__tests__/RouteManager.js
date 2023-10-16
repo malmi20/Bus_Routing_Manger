@@ -39,6 +39,7 @@ describe("RouteManager Component test", () => {
     jest.resetAllMocks();
   });
 
+  //check whether if details of the RouteManager component render correctly
   it("should render RouteManager component correctly", async () => {
     fetchBusDetails.mockResolvedValue(busDetailsMockData);
     fetchBusRoutes.mockResolvedValue(busRoutesMockData);
@@ -61,6 +62,7 @@ describe("RouteManager Component test", () => {
     expect(screen.getByText("Start Date Time")).toBeInTheDocument();
   });
 
+  //check whether it gives an error when click on Add button without filling the details
   it("should show validation error when click on Add button without filling the details", async () => {
     fetchBusDetails.mockResolvedValue(busDetailsMockData);
     fetchBusRoutes.mockResolvedValue(busRoutesMockData);
@@ -89,6 +91,7 @@ describe("RouteManager Component test", () => {
     });
   });
 
+  //check whether if the search option of the routeManager page will be able to search by route id
   it("should able to search by route id", async () => {
     fetchBusDetails.mockResolvedValue(busDetailsMockData);
     fetchBusRoutes.mockResolvedValue(busRoutesMockData);

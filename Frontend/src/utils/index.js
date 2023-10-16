@@ -1,3 +1,4 @@
+//function for delaying function calls 
 export const debounce = (func, wait, immediate) => {
   let timeout;
   return function executedFunction() {

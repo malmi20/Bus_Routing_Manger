@@ -32,6 +32,7 @@ describe("SignUp Component test", () => {
     jest.resetAllMocks();
   });
 
+  //check whether the signup component render correctly 
   it("should render signup component correctly", async () => {
     render(
       <>
@@ -49,6 +50,7 @@ describe("SignUp Component test", () => {
     expect(screen.getByText("Is Bus Owner")).toBeInTheDocument();
   });
 
+  //check whether the validation error wii show when click on Register button without filling email and password
   it("should show validation error when click on Register button without filling email and password", async () => {
     render(
       <>
@@ -73,6 +75,7 @@ describe("SignUp Component test", () => {
     });
   });
 
+  //check whether the validation error shows when passwords are less than 8 characters
   it("should show validation error when passwords are less than 8 characters", async () => {
     register.mockResolvedValue(signUpUserAlreadyExistsMockData);
     render(
@@ -97,6 +100,7 @@ describe("SignUp Component test", () => {
     });
   });
 
+  //check whether it shows validation error when password and confirm passwords are not same
   it("should show validation error when password and confirm passwords are not same", async () => {
     register.mockResolvedValue(signUpUserAlreadyExistsMockData);
     render(
@@ -124,6 +128,7 @@ describe("SignUp Component test", () => {
     });
   });
 
+  //check whether the toast error appears if User already exists when signing in with incorrect password
   it("should show toast error of User already exists when signing in with incorrect password", async () => {
     register.mockResolvedValue(signUpUserAlreadyExistsMockData);
     render(
@@ -151,6 +156,7 @@ describe("SignUp Component test", () => {
     });
   });
   
+  //check whether the it shows User registered successful message when signing up in with correct details
   it("should show User registered successful message when signing up in with correct details", async () => {
     register.mockResolvedValue(signUpMockData);
     const changeState = jest.fn();

@@ -7,6 +7,8 @@ export default function Auth() {
   const [type, setType] = useState("signIn");
   const SignUpFormRef = useRef();
   const SignInFormRef = useRef();
+
+  //swap signin and sign up vice versa
   const handleOnClick = text => {
     if (text !== type) {
       if(text === "signIn") SignUpFormRef.current.resetFormChanges();

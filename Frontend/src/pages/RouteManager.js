@@ -162,6 +162,7 @@ function RouteManager() {
     setFieldValue("to", bus.to);
   };
 
+  //Generate the report of route details
   const handleDownloadPdf = async () => {
     const doc = new jsPDF();
     doc.autoTable({
