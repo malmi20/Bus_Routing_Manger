@@ -65,7 +65,7 @@ const login = async (req, res, next) => {
   try {
     const user = await customerModel.findOne({ email });
     if (!user) {
-      const error = new Error("User not found.");
+      const error = new Error("Incorrect username or password.");
       error.status = 404;
       throw error;
     }

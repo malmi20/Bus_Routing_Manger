@@ -54,6 +54,25 @@ const getAssignedBusRouteDetails = async (_req, res, next) => {
   }
 };
 
+// check if bus_no exists in assignedBusRouteDetailsModel and remove it
+const checkBusNoExistsAndRemove = async (bus_no) => {
+  try {
+    const assignedBusRouteDetails = await assignedBusRouteDetailsModel.findOne({
+      bus_no: bus_no,
+    });
+    if (assignedBusRouteDetails) {
+      const result = await assignedBusRouteDetailsModel.findByIdAndDelete(
+        assignedBusRouteDetails._id
+      );
+      console.log("checkBusNoExistsAndRemove", result);
+    }
+    return;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 const saveAssignedBusRouteDetails = async (req, res, next) => {
   const { bus_no, route_id, start_date_time } = req.body;
   try {
@@ -165,5 +184,6 @@ module.exports = {
   saveAssignedBusRouteDetails,
   getAssignedBusRouteDetails,
   updateBusRouteDetails,
+  checkBusNoExistsAndRemove,
   deleteBusRouteDetails,
 };

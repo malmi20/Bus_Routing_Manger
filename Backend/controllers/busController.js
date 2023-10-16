@@ -1,4 +1,5 @@
 const BusDetails = require('../models/BusDetailsModel')
+const {checkBusNoExistsAndRemove} = require('./busDetailsController')
 const mongoose = require('mongoose')
 
 //get all buses
@@ -67,6 +68,9 @@ const deleteBus = async (req, res) => {
         return res.status(404).json({error: 'no such bus'})
     }
     console.log(id)
+    
+    // check if bus exists and delete if exists in AssignedBusRouteDetailsModel
+    await checkBusNoExistsAndRemove(id);
 
     const bus = await BusDetails.findByIdAndDelete(id)
 
@@ -80,7 +84,7 @@ const deleteBus = async (req, res) => {
 //update bus
 const updateBus = async (req, res) => {
     const {id} = req.params
-
+    
     //const { description, amount} = req.body;
 
     if(!mongoose.Types.ObjectId.isValid(id)){
