@@ -4,7 +4,6 @@ import OwnerHome from "./pages/OwnerHome";
 import RouteMHome from "./pages/RouteMHome";
 import Auth from "./pages/Auth";
 import RouteManager from "./pages/RouteManager";
-import Profile from "./pages/Profile";
 import { AppContext } from "./context/AuthContext";
 import BusList from "./pages/BusList";
 import AddBus from "./pages/AddBus";
@@ -21,7 +20,6 @@ const AppRoutes = () => {
         {/* Home Elements */}
         <Route path={"/auth"} element={<Auth />} />
         <Route path={"/routeManager"} element={<RouteManager />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/buslist" element={<BusList/>}/>
         <Route path="/addbus" element={<AddBus/>}/>
         <Route path="/updateBus/:id" element={<UpdateBus/>}/>
