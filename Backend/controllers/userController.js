@@ -71,6 +71,7 @@ const login = async (req, res, next) => {
       error.status = 404;
       throw error;
     }
+    //checks whether the provided password matches the hashed password stored in the database 
     const passwordCheck = await bcrypt.compare(password, user.password);
     if (!passwordCheck) {
       const error = new Error("Incorrect username or password.");

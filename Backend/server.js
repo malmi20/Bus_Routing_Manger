@@ -6,6 +6,7 @@ class Server {
   static instance;
 
   constructor() {
+    // checks if an instance of the server already exists and returns it 
     if (Server.instance) {
       return Server.instance;
     }

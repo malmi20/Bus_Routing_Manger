@@ -76,7 +76,7 @@ const checkBusNoExistsAndRemove = async (bus_no) => {
   }
 };
 
-//Assigning bus routes with buses and time
+//Add bus routes with buses and time
 const saveAssignedBusRouteDetails = async (req, res, next) => {
   const { bus_no, route_id, start_date_time } = req.body;
   try {
